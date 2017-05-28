@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventCategoryDaoSqlite implements EventCategoryDao{
@@ -37,6 +38,24 @@ public class EventCategoryDaoSqlite implements EventCategoryDao{
 
     @Override
     public List<EventCategory> getAll() {
-        return null;
+        List<EventCategory> categories = new ArrayList<>();
+
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement("SELECT * FROM categories");
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                EventCategory eventCategory = new EventCategory(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"));
+                categories.add(eventCategory);
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categories;
     }
 }
