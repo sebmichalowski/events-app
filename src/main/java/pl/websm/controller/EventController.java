@@ -1,6 +1,6 @@
-package controller;
+package pl.websm.controller;
 
-import dao.EventDao;
+import pl.websm.dao.EventDao;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
