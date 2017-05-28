@@ -30,6 +30,8 @@ public class EventCategoryDaoSqlite implements EventCategoryDao{
                         resultSet.getInt("id"),
                         resultSet.getString("name"));
             }
+            connection.close();
+            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
