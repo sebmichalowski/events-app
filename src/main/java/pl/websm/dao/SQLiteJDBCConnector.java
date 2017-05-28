@@ -43,4 +43,18 @@ public class SQLiteJDBCConnector {
                         ")");
         System.out.println("Database tables created.");
     }
+
+    private static void insertToDb() throws SQLException {
+        connection = connection();
+        statement = connection.createStatement();
+        statement.execute("INSERT INTO events (name, date, description, category, link) \n" +
+                "VALUES ('Event 1', '2022-01-01', 'First event', 1, 'https://www.codecool.pl/'), \n" +
+                "('Event 2', '2023-02-02', 'Description for second event', 2, 'https://websm.pl');");
+        statement.execute("INSERT INTO categories(name)" +
+                "VALUES ('Category One')," +
+                "       ('Category Two')," +
+                "       ('Category Three')," +
+                "       ('Category Four')");
+        System.out.println("Data inserted");
+    }
 }
