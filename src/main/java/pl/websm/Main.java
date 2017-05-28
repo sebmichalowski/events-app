@@ -1,4 +1,6 @@
-import controller.EventController;
+package pl.websm;
+
+import pl.websm.controller.EventController;
 import spark.Request;
 import spark.Response;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
