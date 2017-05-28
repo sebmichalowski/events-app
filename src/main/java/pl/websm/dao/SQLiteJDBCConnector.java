@@ -44,6 +44,22 @@ public class SQLiteJDBCConnector {
         System.out.println("Database tables created.");
     }
 
+    public static void checkParameters(String[] args){
+        if (args.length > 0 && args[0].equals("--init-db")) {
+            try {
+                createTables();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        } else if (args.length > 0 && args[0].equals("--migrate-db")) {
+            try {
+                insertToDb();
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
     private static void insertToDb() throws SQLException {
         connection = connection();
         statement = connection.createStatement();
