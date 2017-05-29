@@ -77,7 +77,17 @@ public class EventDaoSqlite implements EventDao{
 
     @Override
     public void remove(Integer id) {
-
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement(
+                    "DELETE FROM events WHERE id=(?)");
+            statement.setInt(1, id);
+            statement.execute();
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
