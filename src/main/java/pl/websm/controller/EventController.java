@@ -116,4 +116,15 @@ public class EventController {
                 new Event(event.getId(), name, date,  description, eventCategory, link));
         return AdminController.renderAdminInterface(request, response);
     }
+
+    public static ModelAndView removeEvent(Request request, Response response) {
+        Map params = new HashMap<>();
+        EventDao eventDao = new EventDaoSqlite();
+        Event event = eventDao.find(Integer.parseInt(request.params(":id")));
+        if (event == null) {
+            return AdminController.renderAdminInterface(request, response);
+        }
+        eventDao.remove(event.getId());
+        return AdminController.renderAdminInterface(request, response);
+    }
 }
