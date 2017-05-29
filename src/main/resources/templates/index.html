@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+
+<div class="container">
+    <form action="/sort" th:action="@{sort}" method="post">
+        <label for="category">Category</label>
+        <select name="category" id="category">
+            <option th:each="category : ${categories}"
+                    th:id="${category.id}"
+                    th:value="${category.id}"
+                    th:text="${category.name}">
+            </option>
+        </select><br/>
+        <button name="submit" type="submit" id="submit">FILTER</button>
+    </form>
+    <br />
+    <form action="/searchEngine" th:action="@{search}" method="post">
+        <div class="input-group">
+            <input pattern=".{3,}" required title="3 characters minimum" type="text" class="form-control" placeholder="Search for event" name="name">
+            <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Category</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td><a th:href="@{{id}/description(id=${event.id})}"><span th:text="${event.name}"></span></a></td>
+            <td th:text="${event.date}"></td>
+            <td th:value="${event.category.id}" th:text="${event.category.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>
