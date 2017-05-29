@@ -17,13 +17,11 @@
                th:value="${event.description}"/><br/>
 
         <label for="category">Category</label>
-        <select th:field="${event.category.id}" name="category" id="category">
-            <option th:each="category : ${categories}"
-                    th:id="${category.id}"
-                    th:value="${category.id}"
-                    th:text="${category.name}">
-            </option>
-        </select><br/>
+        <select id="category" name="category">
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"
+                    th:selected="${(category.id == event.category.id) ? 'selected' : 'false'}"/>
+        </select>
+        <br/>
 
         <label for="link">Link</label>
         <input id="link" name="link" placeholder="Event link" type="text" th:value="${event.link}"/><br/>
