@@ -1,22 +1,27 @@
 package pl.websm.controller;
 
+import pl.websm.dao.EventCategoryDao;
+import pl.websm.dao.EventCategoryDaoSqlite;
 import pl.websm.dao.EventDao;
+import pl.websm.dao.EventDaoSqlite;
+import pl.websm.model.Event;
+import pl.websm.model.EventCategory;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * Created by rafalstepien on 28/04/2017.
- */
 public class EventController {
-    public static ModelAndView renderProducts(Request req, Response res) {
-        //Get events from database by Dao
 
+    public static ModelAndView renderEvents(Request request, Response response) {
         Map params = new HashMap<>();
-        params.put("eventContainer", "Codecool cinema");
-        return new ModelAndView(params, "product/index");
+        EventDao eventDao = new EventDaoSqlite();
+        EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
+        params.put("events", eventDao.getAll());
+        params.put("categories", eventCategoryDao.getAll());
+        return new ModelAndView(params, "index");
     }
 }
