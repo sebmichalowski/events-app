@@ -24,4 +24,15 @@ public class EventController {
         params.put("categories", eventCategoryDao.getAll());
         return new ModelAndView(params, "index");
     }
+
+    public static ModelAndView renderEventDetails(Request request, Response response) {
+        Map params = new HashMap<>();
+        EventDao eventDao = new EventDaoSqlite();
+        Event event = eventDao.find(Integer.parseInt(request.params(":id")));
+        if (event == null) {
+            return EventController.renderEvents(request, response);
+        }
+        params.put("event", event);
+        return new ModelAndView(params, "event/description");
+    }
 }
