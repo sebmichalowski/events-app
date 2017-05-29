@@ -13,6 +13,7 @@ public class EventDaoSqlite implements EventDao{
 
     private Connection connection;
     private PreparedStatement statement;
+    private ResultSet resultSet;
 
     @Override
     public void save(Event event) {
@@ -50,7 +51,28 @@ public class EventDaoSqlite implements EventDao{
 
     @Override
     public Event find(Integer id) {
-        return null;
+        Event event = null;
+
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement("SELECT * FROM events WHERE id=(?)");
+            statement.setInt(1, id);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                event = new Event(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("description"),
+                        new EventCategoryDaoSqlite().find(
+                                resultSet.getInt("category_id")),
+                        resultSet.getString("link"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return event;
     }
 
     @Override
