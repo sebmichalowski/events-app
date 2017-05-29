@@ -76,4 +76,17 @@ public class EventController {
         eventDao.save(event);
         return AdminController.renderAdminInterface(request, response);
     }
+
+    public static ModelAndView renderEditEvent(Request request, Response response) {
+        Map params = new HashMap<>();
+        EventDao eventDao = new EventDaoSqlite();
+        EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
+        Event event = eventDao.find(Integer.parseInt(request.params(":id")));
+        if (event == null) {
+            return AdminController.renderAdminInterface(request, response);
+        }
+        params.put("event", event);
+        params.put("categories", eventCategoryDao.getAll());
+        return new ModelAndView(params, "event/edit_event");
+    }
 }
