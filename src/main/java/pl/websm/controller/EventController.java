@@ -127,4 +127,18 @@ public class EventController {
         eventDao.remove(event.getId());
         return AdminController.renderAdminInterface(request, response);
     }
+    
+    public static ModelAndView searchEngine(Request request, Response response) {
+        Map params = new HashMap<>();
+        EventDao eventDao = new EventDaoSqlite();
+        EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
+        String name = request.queryParams("name");
+        if (name.length() < 3) {
+            return EventController.renderEvents(request, response);
+        }
+        List<Event> events = eventDao.getBy(name);
+        params.put("events", events);
+        params.put("categories", eventCategoryDao.getAll());
+        return new ModelAndView(params, "index");
+    }
 }
