@@ -13,4 +13,5 @@ public interface EventDao {
 
     List<Event> getAll();
     List<Event> getBy(EventCategory eventCategory);
+    List<Event> getBy(String name);
 }
