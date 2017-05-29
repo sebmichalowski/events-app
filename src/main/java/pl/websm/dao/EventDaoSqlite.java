@@ -3,10 +3,7 @@ package pl.websm.dao;
 import pl.websm.model.Event;
 import pl.websm.model.EventCategory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -144,6 +141,33 @@ public class EventDaoSqlite implements EventDao{
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        return events;
+    }
+
+    @Override
+    public List<Event> getBy(String name) {
+        List<Event> events = new ArrayList<>();
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement("SELECT * FROM events WHERE name LIKE (?)");
+            statement.setString(1,'%' + name + '%');
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("description"),
+                        new EventCategoryDaoSqlite().find(
+                                resultSet.getInt("category_id")),
+                        resultSet.getString("link"));
+                events.add(event);
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
         return events;
     }
