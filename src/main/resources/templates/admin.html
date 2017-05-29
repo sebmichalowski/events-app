@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+
+<div class="container">
+    <a th:href="@{~/event/add}">Add new event</a><br/>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Edit</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:href="@{~/{id}/description(id=${event.id})}"><span th:text="${event.name}"></span></td>
+            <td><a th:href="@{~/{id}/edit(id=${event.id})}">Edit</a></td>
+            <td><a th:href="@{~/{id}/remove(id=${event.id})}">Remove</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+</body>
+</html>
