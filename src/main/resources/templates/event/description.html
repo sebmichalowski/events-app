@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+</head>
+<body>
+
+<div class="container">
+    <div class="row list-group">
+        <div class="item col-xs-4 col-lg-4">
+            <p>Name: <span th:text="${event.name}"></span></p>
+            <p>Date: <span th:text="${event.date}"></span></p>
+            <p>Description: <span th:text="${event.description}"></span></p>
+            <p>Category: <span th:text="${event.category.name}"></span></p>
+            <a th:href="${event.link}"><p th:text="${event.link}">Link</p></a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer :: footer"></div>
+
+
+</body>
+</html>
