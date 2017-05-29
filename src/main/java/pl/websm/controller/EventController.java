@@ -127,7 +127,7 @@ public class EventController {
         eventDao.remove(event.getId());
         return AdminController.renderAdminInterface(request, response);
     }
-
+    
     public static ModelAndView searchEngine(Request request, Response response) {
         Map params = new HashMap<>();
         EventDao eventDao = new EventDaoSqlite();
