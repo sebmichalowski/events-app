@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class EventDaoSqlite implements EventDao{
@@ -92,7 +93,30 @@ public class EventDaoSqlite implements EventDao{
 
     @Override
     public List<Event> getAll() {
-        return null;
+        List<Event> events = new ArrayList<>();
+
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement("SELECT * FROM events");
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("description"),
+                        new EventCategoryDaoSqlite().find(
+                                resultSet.getInt("category_id")),
+                        resultSet.getString("link"));
+                events.add(event);
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
     }
 
     @Override
