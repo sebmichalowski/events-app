@@ -65,6 +65,8 @@ public class SQLiteJDBCConnector {
         statement = connection.createStatement();
         statement.execute("INSERT INTO events (name, date, description, category, link) \n" +
                 "VALUES ('Event 1', '2022-01-01', 'First event', 1, 'https://www.codecool.pl/'), \n" +
+                "('Event 3', '2025-01-01', 'Third event', 3, 'https://www.cool.pl/'), \n" +
+                "('Event 4', '2025-01-01', 'Fourth event', 4, 'https://www.ol.pl/'), \n" +
                 "('Event 2', '2023-02-02', 'Description for second event', 2, 'https://websm.pl');");
         statement.execute("INSERT INTO categories(name)" +
                 "VALUES ('Category One')," +
