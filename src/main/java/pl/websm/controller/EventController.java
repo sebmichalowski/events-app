@@ -48,4 +48,11 @@ public class EventController {
         params.put("categories", eventCategoryDao.getAll());
         return new ModelAndView(params, "index");
     }
+
+    public static ModelAndView renderAddEvent(Request request, Response response) {
+        Map params = new HashMap<>();
+        EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
+        params.put("categories", eventCategoryDao.getAll());
+        return new ModelAndView(params, "event/add_event");
+    }
 }
