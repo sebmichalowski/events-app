@@ -121,6 +121,30 @@ public class EventDaoSqlite implements EventDao{
 
     @Override
     public List<Event> getBy(EventCategory eventCategory) {
-        return null;
+        List<Event> events = new ArrayList<>();
+
+        try {
+            connection = SQLiteJDBCConnector.connection();
+            statement = connection.prepareStatement("SELECT * FROM events WHERE category_id=(?)");
+            statement.setInt(1, eventCategory.getId());
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                Event event = new Event(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("date"),
+                        resultSet.getString("description"),
+                        new EventCategoryDaoSqlite().find(
+                                resultSet.getInt("category_id")),
+                        resultSet.getString("link"));
+                events.add(event);
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return events;
     }
 }
