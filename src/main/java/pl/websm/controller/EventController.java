@@ -55,4 +55,25 @@ public class EventController {
         params.put("categories", eventCategoryDao.getAll());
         return new ModelAndView(params, "event/add_event");
     }
+
+    public static ModelAndView addNew(Request request, Response response) {
+        EventDao eventDao = new EventDaoSqlite();
+        EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
+        String name = request.queryParams("name");
+        String date = request.queryParams("date");
+        String description = request.queryParams("description");
+        String link = request.queryParams("link");
+        if (name.isEmpty() || date.isEmpty() || description.isEmpty() || link.isEmpty() || date.length() > 10) {
+            return AdminController.renderAdminInterface(request, response);
+        }
+        Event event = new Event(name,
+                date,
+                description,
+                eventCategoryDao.find(
+                        Integer.parseInt(
+                                request.queryParams("category"))),
+                link);
+        eventDao.save(event);
+        return AdminController.renderAdminInterface(request, response);
+    }
 }
