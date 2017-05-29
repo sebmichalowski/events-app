@@ -7,18 +7,18 @@ public class Event extends BaseModel {
     private EventCategory eventCategory;
     private String link;
 
-    public Event(Integer id, String name, String description, String date, EventCategory eventCategory, String link){
+    public Event(Integer id, String name, String date, String description, EventCategory eventCategory, String link){
         super(id, name);
-        setDescription(description);
         setDate(date);
+        setDescription(description);
         setEventCategory(eventCategory);
         setLink(link);
     }
 
-    public Event(String name, String description, String date, EventCategory eventCategory, String link){
+    public Event(String name, String date, String description, EventCategory eventCategory, String link){
         super(name);
-        setDescription(description);
         setDate(date);
+        setDescription(description);
         setEventCategory(eventCategory);
         setLink(link);
     }
