@@ -1,6 +1,6 @@
 package pl.websm.model;
 
-public class BaseModel {
+abstract class BaseModel {
 
     private Integer id;
     private String name;
