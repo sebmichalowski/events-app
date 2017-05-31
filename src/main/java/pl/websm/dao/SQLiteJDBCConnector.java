@@ -63,7 +63,7 @@ public class SQLiteJDBCConnector {
     private static void insertToDb() throws SQLException {
         connection = connection();
         statement = connection.createStatement();
-        statement.execute("INSERT INTO events (name, date, description, category, link) \n" +
+        statement.execute("INSERT INTO events (name, date, description, category_id, link) \n" +
                 "VALUES ('Event 1', '2022-01-01', 'First event', 1, 'https://www.codecool.pl/'), \n" +
                 "('Event 3', '2025-01-01', 'Third event', 3, 'https://www.cool.pl/'), \n" +
                 "('Event 4', '2025-01-01', 'Fourth event', 4, 'https://www.ol.pl/'), \n" +
