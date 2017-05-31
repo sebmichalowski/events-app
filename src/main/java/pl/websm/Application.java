@@ -18,7 +18,6 @@ class Application {
     }
 
     private static void dispatchRoutes(){
-
         exception(Exception.class, (e, req, res) -> e.printStackTrace());
         staticFileLocation("/public");
         port(8888);
