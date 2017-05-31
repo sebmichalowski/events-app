@@ -5,6 +5,7 @@
 <body>
 
 <div class="container">
+
     <form action="/sort" th:action="@{sort}" method="post">
         <label for="category">Category</label>
         <select name="category" id="category">
@@ -16,7 +17,8 @@
         </select><br/>
         <button name="submit" type="submit" id="submit">FILTER</button>
     </form>
-    <br />
+    <br/>
+
     <form action="/searchEngine" th:action="@{search}" method="post">
         <div class="input-group">
             <input pattern=".{3,}" required title="3 characters minimum" type="text" class="form-control" placeholder="Search for event" name="name">
@@ -25,6 +27,7 @@
             </div>
         </div>
     </form>
+
     <table class="table">
         <thead>
         <tr>
@@ -41,9 +44,8 @@
         </tr>
         </tbody>
     </table>
+
 </div>
-
-
 
 <div th:replace="footer :: footer"></div>
 
