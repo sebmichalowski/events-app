@@ -5,8 +5,8 @@
 <body>
 
 <div class="container">
+    
     <form action="/add" th:action="@{add}" method="post">
-
         <label for="name">Event title</label>
         <input id="name" name="name" placeholder="Event name" type="text" value="" /><br/>
 
@@ -23,13 +23,15 @@
                     th:value="${category.id}"
                     th:text="${category.name}">
             </option>
-        </select><br/>
+        </select>
+        <br/>
 
         <label for="link">Link</label>
         <input id="link" name="link" placeholder="Event link" type="text" value="" /><br/>
 
         <button name="submit" type="submit" id="submit">ADD</button>
     </form>
+
 </div>
 
 <div th:replace="footer :: footer"></div>
