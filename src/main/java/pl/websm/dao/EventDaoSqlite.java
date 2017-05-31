@@ -40,8 +40,6 @@ public class EventDaoSqlite implements EventDao{
             statement.setInt(4, event.getEventCategory().getId());
             statement.setString(5, event.getLink());
             statement.execute();
-            statement.close();
-            connection.close();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -81,8 +79,6 @@ public class EventDaoSqlite implements EventDao{
                     "DELETE FROM events WHERE id=(?)");
             statement.setInt(1, id);
             statement.execute();
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -108,8 +104,6 @@ public class EventDaoSqlite implements EventDao{
                         resultSet.getString("link"));
                 events.add(event);
             }
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -137,8 +131,6 @@ public class EventDaoSqlite implements EventDao{
                         resultSet.getString("link"));
                 events.add(event);
             }
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -164,8 +156,6 @@ public class EventDaoSqlite implements EventDao{
                         resultSet.getString("link"));
                 events.add(event);
             }
-            statement.close();
-            connection.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
