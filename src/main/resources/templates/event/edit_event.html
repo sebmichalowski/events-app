@@ -5,6 +5,7 @@
 <body>
 
 <div class="container">
+
     <form th:action="edit" method="post">
         <label for="name">Event title</label>
         <input id="name" name="name" type="text" th:value="${event.name}"/><br/>
@@ -28,6 +29,7 @@
 
         <button name="submit" type="submit" id="submit">Edit</button>
     </form>
+
 </div>
 
 <div th:replace="footer :: footer"></div>
