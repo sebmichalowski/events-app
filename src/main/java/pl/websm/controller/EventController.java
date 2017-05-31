@@ -50,7 +50,7 @@ public class EventController {
     }
 
     public static ModelAndView renderAddEvent(Request request, Response response) {
-        Map params = new HashMap<>();
+        Map<String, List> params = new HashMap<>();
         EventCategoryDao eventCategoryDao = new EventCategoryDaoSqlite();
         params.put("categories", eventCategoryDao.getAll());
         return new ModelAndView(params, "event/add_event");
